@@ -1,0 +1,9 @@
+Django==5.2.5
+gunicorn
+dj-database-url
+python-decouple
+cloudinary
+django-cloudinary-storage
+Pillow
+qrcode
+whitenoise

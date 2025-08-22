@@ -1,0 +1,27 @@
+{% extends "admin/admin-base.html" %}
+{% load static %}
+
+{% block title %}Scan QR Code - Gym{% endblock title %}
+
+{% block main_content %}
+    <section>
+        <h1>QR Code Scanner</h1>
+    </section>
+    <section class="gym-card member-card">
+        <div>
+            <div class="Photo-section">
+                <img src="{% static 'images/qr-code-svgrepo-com.svg' %}" alt="QR Code placeholder image" style="border-radius: 0px;">
+            </div>
+        </div>
+        <form action="" method="POST" class="qr-form">
+            {% csrf_token %}
+            <div>
+                <label for="qr-code-input"><p>QR Code Data</p></label>
+                <input type="text" id="qr-code-input" name="qr_code_data" placeholder="Scan QR code or enter member URL/ID">
+            </div>
+            <div class="form-btns">
+                <button type="submit" class="btn btn-1">Find Member</button>
+            </div>
+        </form>
+    </section>
+{% endblock main_content %}

@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Login{% endblock title %}
+{% block content %}
+    <header>
+        <nav class="navbar">
+            <a href="{% url 'login' %}"><img src="{% static 'images/image.png' %}" alt="Logo" width="100px" /></a>
+            <ul class="nav-links">
+                <li><a href="{% url 'login' %}"><img src="{% static 'images/login-2-svgrepo-com.svg' %}" alt="Login/Logout" style="width: 35px;"></a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section>
+            <h1>Login</h1>
+        </section>
+        <section class="gym-card member-card login-card" style="width: 700px;">
+            <form action="" method="POST" class="login-form">
+                {% csrf_token %}
+                <div>
+                    <label for="username"><p>Username<span class="star">*</span></p></label>
+                    <input type="text" id="username" name="username" placeholder="Enter your username" required>
+                </div>
+                <div>
+                    <label for="password"><p>Password<span class="star">*</span></p></label>
+                    <input type="password" id="password" name="password" placeholder="Enter your password" required>
+                </div>
+                {% if error_message %}
+                    <p style="color: red; margin-top: 10px; text-align: center;">{{ error_message }}</p>
+                {% endif %}
+                <div class="form-btns">
+                    <button type="submit" class="btn btn-1 form-btn">Login</button>
+                </div>
+            </form>
+        </section>
+    </main>
+{% endblock content %}

@@ -1,0 +1,63 @@
+{# --- START OF FILE gym_membership_system/admin_bord/templates/admin-dashboard.html --- #}
+{% extends "admin/admin-base.html" %}
+{% load static %}
+
+{% block title %}Admin Dashboard - Gym{% endblock title %}
+
+{% block main_content %}
+    <section>
+        <h1>Dashboard</h1>
+    </section>
+
+    <section class="gym-card">
+        <div class="members-top">
+            <h2>All members</h2>
+            <div class="members-btns">
+                <a href="{% url 'add-member' %}" class="btn btn-1">Add New Member</a>
+            </div>
+        </div>
+        <div class="members-table-container">
+            <div class="members">
+                <div class="members-header">
+                    <div>Member</div>
+                    <div>Phone</div>
+                    <div>Subscription</div>
+                    <div>User Name</div>
+                    <div>Status</div>
+                    <div>Actions</div>
+                </div>
+                <div class="members-body">
+                    <!-- Data -->
+                    {% for user in users %}
+                        <div class="row">
+                            <div class="member-field">
+                                <img src="{{ user.image.url }}", alt="Member photo">
+                                <div>
+                                    <p>{{user.name}}</p>
+                                    <p>{{user.age}}</p>
+                                </div>
+                            </div>
+                            <div>{{user.phone}}</div>
+                            <div>
+                                <p>{{user.subscription_start_date}}</p>
+                                <p>{{user.subscription_end_date}}</p>
+                            </div>
+                            <div>
+                                <p>{{user.user_name}}</p>
+                            </div>
+                            <div>
+                                {% now "Y-m-d" as today_date %}
+                                {% if user.subscription_end_date|date:"Y-m-d" < today_date %}
+                                    <span class="status expired">Expired</span>
+                                {% else %}
+                                    <span class="status active">Active</span>
+                                {% endif %}
+                            </div>
+                            <div><a href="{% url 'edit-member' user.unique_id %}" class="btn btn-2" style="width: 80px;">Edit</a></div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock main_content %}

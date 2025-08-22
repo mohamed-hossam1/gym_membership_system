@@ -1,0 +1,95 @@
+{% extends "admin/admin-base.html" %}
+{% load static %}
+
+{% block title %}Add New Member - Gym{% endblock title %}
+
+{% block main_content %}
+<section>
+    <h1>Add New Member</h1>
+</section>
+<section class="gym-card member-card">
+    <form action="" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div>
+            <div class="Photo-section">
+                <img id="preview" src="{% static 'images/Unknown.png' %}" 
+                     alt="Member photo preview" style="max-width: 200px; display: block; margin-bottom: 10px;" />
+
+                <label for="{{ form.image.id_for_label }}" class="btn btn-1" style="cursor: pointer;">Upload Photo</label>
+                <div style="display: none;">
+                    {{ form.image }}
+                </div>
+
+                {% if form.image.errors %}
+                    <div style="color: red; margin-top: 10px;">{{ form.image.errors }}</div>
+                {% endif %}
+            </div>
+        </div>
+
+        <div class="form-section">
+            <div>
+                <label for="{{ form.name.id_for_label }}"><p>Full Name<span class="star">*</span></p></label>
+                {{ form.name }}
+                {% if form.name.errors %}<div style="color: red;">{{ form.name.errors }}</div>{% endif %}
+            </div>
+            <div>
+                <label for="{{ form.age.id_for_label }}"><p>Age<span class="star">*</span></p></label>
+                {{ form.age }}
+                {% if form.age.errors %}<div style="color: red;">{{ form.age.errors }}</div>{% endif %}
+            </div>
+            <div>
+                <label for="{{ form.phone.id_for_label }}"><p>Phone Number<span class="star">*</span></p></label>
+                {{ form.phone }}
+                {% if form.phone.errors %}<div style="color: red;">{{ form.phone.errors }}</div>{% endif %}
+            </div>
+            <div>
+                <label for="{{ form.subscription_start_date.id_for_label }}"><p>Subscription Start Date<span class="star">*</span></p></label>
+                {{ form.subscription_start_date }}
+                {% if form.subscription_start_date.errors %}<div style="color: red;">{{ form.subscription_start_date.errors }}</div>{% endif %}
+            </div>
+            <div>
+                <label for="{{ form.subscription_end_date.id_for_label }}"><p>Subscription End Date<span class="star">*</span></p></label>
+                {{ form.subscription_end_date }}
+                {% if form.subscription_end_date.errors %}<div style="color: red;">{{ form.subscription_end_date.errors }}</div>{% endif %}
+            </div>
+        </div>
+
+        <div class="form-btns">
+            <a href="{% url 'admin-dashboard' %}" class="btn btn-2">Cancel</a>
+            <button type="submit" class="btn btn-1">Save Member</button>
+        </div>
+    </form>
+</section>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    const menuToggle = document.querySelector('.menu-toggle');
+    const navLinks = document.querySelector('.nav-links');
+
+    if (menuToggle && navLinks) {
+        menuToggle.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+    }
+
+    const fileInput = document.getElementById('id_image');
+    const previewImg = document.getElementById('preview');
+
+    if (fileInput) {
+        fileInput.addEventListener('change', function(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    previewImg.src = e.target.result;
+                    previewImg.style.display = 'block';
+                }
+                reader.readAsDataURL(file);
+            }
+        });
+    }
+});
+</script>
+{% endblock %}
+
+

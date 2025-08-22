@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<header>
+    <nav class="navbar">
+        <a href="{% url 'admin-dashboard' %}"><img src="{% static 'images/image.png' %}" alt="Logo" width="100px" /></a>
+        <ul class="nav-links">
+            <li><a href="{% url 'admin-dashboard' %}" class="nav-link">Admin Dashboard</a></li>
+            <li><a href="{% url 'add-member' %}" class="nav-link">Add Member</a></li>
+            <li><a href="{% url 'scan-qr' %}" class="nav-link">Scan QR</a></li>
+            <li><a href="{% url 'login' %}"><img src="{% static 'images/login-2-svgrepo-com.svg' %}" alt="Login/Logout" style="width: 35px;"></a></li>
+        </ul>
+        <div class="menu-toggle">
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+        </div>
+    </nav>
+</header>
+
+<main>
+    {% block main_content %}
+    {% endblock main_content %}
+</main>
+{% endblock content %}

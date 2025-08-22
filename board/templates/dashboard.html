@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Dashboard - Gym{% endblock title %}
+{% block content %}
+    <header>
+        <nav class="navbar">
+            <a href="{% url 'login' %}"><img src="{% static 'images/image.png' %}" alt="Logo" width="100px" /></a>
+            <ul class="nav-links">
+                <li><a href="{% url 'login' %}"><img src="{% static 'images/login-2-svgrepo-com.svg' %}" alt="Login/Logout" style="width: 35px;"></a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section>
+            <h1>Dashboard</h1>
+        </section>
+        <section class="gym-card member-card">
+            <div>
+                <div class="Photo-section">
+                    <img src="{{ user.image.url }}" alt="Member photo">
+                </div>
+            </div>
+            <div class="form-section">
+                <div>
+                    <label for="name"><p>Full Name<span class="star">*</span></p></label>
+                    <input type="text" value="{{user.name}}" id="name" readonly style="background-color: #f0f0f0;">
+                </div>
+                <div>
+                    <label for="age"><p>Age<span class="star">*</span></p></label>
+                    <input type="number" value="{{user.age}}" id="age" readonly style="background-color: #f0f0f0;">
+                </div>
+                <div>
+                    <label for="phone"><p>Phone Number<span class="star">*</span></p></label>
+                    <input type="tel" value="{{user.phone}}" id="phone" readonly style="background-color: #f0f0f0;">
+                </div>
+                <div>
+                    <label for="subscription_start_date"><p>Subscription Start Date<span class="star">*</span></p></label>
+                    <input type="date" value="{{user.subscription_start_date|date:'Y-m-d'}}" id="subscription_start_date" readonly style="background-color: #f0f0f0;">
+
+                </div>
+                <div>
+                    <label for="subscription_end_date"><p>Subscription End Date<span class="star">*</span></p></label>
+                    <input type="date" value="{{user.subscription_end_date|date:'Y-m-d'}}" id="subscription_end_date" readonly style="background-color: #f0f0f0;">
+                </div>
+                <div>
+                    <label><p>User Name</p></label>
+                    <input type="text" value="{{ user.user_name }}" readonly style="background-color: #f0f0f0;">
+                </div>
+                <div class="status-card">
+                    {% now "Y-m-d" as today_date %}
+                    {% if user.subscription_end_date|date:"Y-m-d" < today_date %}
+                        <span class="status status-2 expired">Expired</span>
+                    {% else %}
+                        <span class="status status-2 active">Active</span>
+                    {% endif %}
+                </div>
+                <div style="margin: 20px auto;grid-column: 1/3; text-align: center;">
+                    <label><p>QR Code</p></label>
+                    <img src="{{ user.qr_code.url }}" alt="QR Code" style="width: 200px; height: 200px; border-radius: 0;">
+                </div>
+            </div>
+        </section>
+    {% endblock content %}
+    </main>
+
