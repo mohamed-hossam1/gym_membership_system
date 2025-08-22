@@ -9,10 +9,6 @@ A Django-based web application for managing gym memberships, member details, and
 * **Admin Dashboard**: Monitor members and manage data efficiently.
 * **Authentication**: Secure login system for admins.
 
-## Live Demo
-
-You can access the live project here: [Gym Membership System](https://gym-membership-system-1.onrender.com/)
-
 ## Installation
 
 ### 1. Clone the repository
