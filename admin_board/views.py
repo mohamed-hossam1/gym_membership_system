@@ -23,8 +23,6 @@ def is_superuser_check(user):
 @user_passes_test(is_superuser_check, login_url='login')
 def admin_dashboard(request):
     users = Member.objects.all().order_by('name')
-    print(users[1].image.url)
-    print(users[0].image.url)
     return render(request, 'admin-dashboard.html',{'users':users})
 
 
